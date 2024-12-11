@@ -1,0 +1,204 @@
+---
+title: "認識設計模式，提升你程式的可利用性"
+date: 2021-09-06T23:29:10+08:00
+draft: false
+categories:
+  - "DesignPattern"
+tags:
+  - "DP"
+authors: [Arthur]
+toc: true
+---
+
+:toc-title: 目錄
+:toc: left
+
+== 設計模式是什麼?
+
+**設計模式**(Design Pattern)是一個為了解決特定問題的解決方案，是一套為了解決人類反覆遇到的問題，經過整理的程式設計經驗總結。
+
+設計模式一開始是出現在建築學中，1977年，克里斯托佛·亞歷山大 (Christopher Alexander)於他的著作《建築模式語言：城鎮、建築、構造（A Pattern Language: Towns Building Construction）》提出此改念。
+
+=== Gang of Four(GoF)
+
+1995年，埃里希·伽瑪（Erich Gamma）、理査德·海爾姆（Richard Helm）、拉爾夫·約翰森（Ralph Johnson）、約翰·威利斯迪斯（John Vlissides）等四位作者合作出版了《設計模式：可複用面向對象軟件的基礎》（Design Patterns: Elements of Reusable Object-Oriented Software）一書，四位作者後來被稱為GoF(Gang of Four)，四人幫在書中收錄了**23**個設計模式，被稱為 GoF 設計模式。
+
+image::/images/GoF.png[GoF]
+
+== 設計模式的優點
+
+- 熟悉設計模式讓你更快速了解框架的程式碼
+
+- 提升程式的可再利用性、可擴展性及可維護性
+
+- 使你與其他工程師更容易得討論抽象層級的觀念
+
+== 何時不該使用設計模式
+
+如果你的需求很簡單，簡單的演算法就可以完成，不要使用設計模式讓你的程式碼複雜度提高。
+
+
+== 設計模式的分類
+
+=== 目的
+
+設計模式依照**目的**(模式的用途)，可分成
+
+. 生成模式(creational)：物件的生成程序
+
+. 結構模式(structural)：處理類別或物件的合成
+
+. 行為模式(behavioral)：類別或物件的互動方式及責任分配
+
+image::/images/design-pattern.png[design-pattern-mind-map]
+
+https://coggle.it/diagram/W9vr5jnK8hFTmJU0/t/design-pattern/1cf39fa03f5b29c143647b0f162fadb1f74d01167fa74dee7113b836cc599555[放大觀看,window=_blank]
+
+=== 範疇
+
+設計模式還可以依照**範疇**，說明此模式主要是用在**類別**(class)還是**物件**(object)身上。
+
+[caption=]
+.設計模式一覽表
+[cols="^1,^2,^2,^2"]
+|===
+| s|生成模式 s|結構模式 s|行為模式
+s|類別 |Factory Method |Adapter e|Interpreter
+
+Template Method
+
+s|物件
+e|Abstract Factory
+
+Builder
+
+Prototype
+
+Singleton
+e|Adapter
+
+Bridge
+
+Composite
+
+Decorator
+
+Facade
+
+Flyweight
+
+Proxy
+e|Chain of Responsibility
+
+Command
+
+Iterator
+
+Mediator
+
+Memento
+
+Observer
+
+State
+
+Strategy
+
+Visitor
+|===
+
+== 一口氣看完23個設計模式
+
+=== Abstract Factory
+
+以同一個介面來建立一整族相關或相依的物件，不需點明各物件真正所屬的具象類別。
+
+=== Adapter
+
+將類別的介面轉換成外界所預期的另一種介面，讓原先無法相容的兩個介面能夠兜在一起使用。
+
+=== Bridge
+
+將實作體系與抽象體系分離開來，讓兩者能各自更動，各自前進。
+
+=== Builder
+
+從複雜物件的佈局中抽取出生成程序，以便用同一個生成程序製造各種不同的物件佈局。
+
+=== Chain of Responsibility
+
+讓多個物件都有機會處理某一訊息，以降低訊息發送者和接受者之間的耦合關係。將接受者物件串聯起來，讓訊息流經其中，直到被處理為止。
+
+=== Command
+
+將訊息封裝成物件，以便能用各種不同訊息、紀錄、復原等方式加以參數化管理。
+
+=== Composite
+
+將物件組織成樹狀結構、「部分－全體」層級關係，讓外界以一致性的方式對待各別物件和整體物件
+
+=== Decorator
+
+將額外權責動態附加於物件身上，不必衍生子類別即可彈性擴增功能。
+
+=== Facade
+
+替子系統裡的一堆介面定義一套統一的高階介面，讓子系統更容易使用。
+
+=== Factory Method
+
+定義可生成物件的介面，但讓子類別去決定該實體化哪一種類別的物件。此模式讓類別將實體化程序交給子類別去處置。
+
+=== Flyweight
+
+以共享機制有效地支援一大堆小規模的物件
+
+=== Interpreter
+
+針對標的語言定義出文法，以及可解讀這種文法的解譯器。
+
+=== Iterator
+
+不須知曉聚合物建的內部細節，即可依序存取內含的每一個元素。
+
+=== Mediator
+
+定義可將一群物件互動方式封裝起來的物件。因為物件彼此不直接相互干涉，所以耦合性低，容易逐一變更互動關係。
+
+=== Memento
+
+在不違反封裝性的前提下，捕捉物件的內部狀態並存在外面，以便日後回復至此一狀態。
+
+=== Observer
+
+定義一對多的物件依存關係，讓物件狀態一有變動，就自動通知其他相依物件，執行更新動作。
+
+=== Prototype
+
+制定可用原型個體生成的物件類型，爾後只需複製此原型即可生成物件。
+
+=== Proxy
+
+替其他物件預留代理者空位，藉此控制存取其他物件。
+
+=== Singleton
+
+確保類別只會有一個物件實體存在，並提供單一存取窗口
+
+=== State
+
+讓物件的外顯行為隨內部狀態的改變而改變，彷彿連類別也變了似的。
+
+=== Strategy
+
+定義一整族演算法，將每一個演算法封裝起來，可互換使用，更可在不影響外界的情況下各別抽換所引用的演算法。
+
+=== Template Method
+
+對於操作，只先定義好演算法的輪廓，某些步驟則留給子類別去填補，以便在不改變演算法整理結構的情況下，讓子類別去精鍊某些步驟。
+
+=== Visitor
+
+定義能逐一施行於物件結構裡各個元素的操作，讓你不必修改作用對象的類別介面，就能定義新的操作。
+
+

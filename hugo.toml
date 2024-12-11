@@ -1,0 +1,183 @@
+baseURL = 'https://kuanchungfeng.github.io/'
+languageCode = "zh-TW"
+defaultContentLanguage = "zh-tw"
+title = "Arthur's Blog"
+
+description = "紀錄日常生活學習的知識與經驗"
+keywords = ["Arthur's Blog", "馮冠中","Arthur","部落格","Arthur Blog"]
+
+theme = "DoIt"
+
+summaryLength = 5
+
+[security]
+  enableInlineShortcodes = false
+  [security.exec]
+    allow = ['asciidoctor']
+
+# Hugo 解析文档的配置
+[markup]
+  # 语法高亮设置 (https://gohugo.io/content-management/syntax-highlighting)
+  [markup.highlight]
+    # false 是必要的设置 (https://github.com/dillonzq/LoveIt/issues/158)
+    noClasses = false
+
+
+[params.home.profile]
+# Gravatar 邮箱, 用于优先在主页显示的头像
+gravatarEmail = ""
+# 主页显示头像的 URL
+avatarURL = "/images/head-shot/head_shot_1.jpg"
+# whether to use typeit animation for subtitle
+typeit = true
+# 是否显示社交账号
+social = true
+
+[params.page.toc]
+  # 是否使用目录
+  enable = true
+  # DoIt 新增 | 0.2.9 是否保持使用文章前面的静态目录
+  keepStatic = false
+  # 是否使侧边目录自动折叠展开
+  auto = true
+## 作者配置
+#[author]
+#name = "Arthur"
+#email = "kuanchungfeng@gmail.com"
+#link = "https://kuanchungfeng.github.io/"
+
+# 用于分类的设置
+[taxonomies]
+author = "authors"
+category = "categories"
+tag = "tags"
+
+
+# 作者的社交信息设置
+[params.social]
+GitHub = "kuanchungfeng"
+Linkedin = "kuanchungfeng"
+Codepen = "pfqcfhfa/full/OJjXYQm"
+Email = "kuanchungfeng@gmail.com"
+Medium = "@kuanchungfeng"
+
+
+[languages]
+	[languages.zh-tw]
+    weight = 1
+    title = "Arthur's Blog"
+    languageCode = "zh-tw"
+    languageName = "中文"
+    # 是否包括中日韩文字
+    hasCJKLanguage = true
+		[languages.zh-tw.params.home.profile]
+		# subtitle shown in home page
+		subtitle = "沒有解決不了的問題，只有還沒想通的思維"
+    [[languages.zh-tw.menu.main]]
+      identifier = "posts"
+      # 你可以在名称 (允许 HTML 格式) 之前添加其他信息, 例如图标
+      pre = ""
+      # 你可以在名称 (允许 HTML 格式) 之后添加其他信息, 例如图标
+      post = ""
+      name = "文章"
+      url = "/posts/"
+      # 当你将鼠标悬停在此菜单链接上时, 将显示的标题
+      title = ""
+      weight = 1
+		[[languages.zh-tw.menu.main]]
+			identifier = "tags"
+			pre = ""
+			post = ""
+			name = "標籤"
+			url = "/tags/"
+			title = ""
+			weight = 2
+		[[languages.zh-tw.menu.main]]
+			identifier = "categories"
+			pre = ""
+			post = ""
+			name = "分類"
+			url = "/categories/"
+			title = ""
+			weight = 3
+		[[languages.zh-tw.menu.main]]
+			identifier = "authors"
+			pre = ""
+			post = ""
+			name = "作者"
+			url = "/authors/"
+			title = ""
+			weight = 4
+		[[languages.zh-tw.menu.main]]
+			identifier = "about"
+			pre = ""
+			post = ""
+			name = "經驗"
+			url = "/about/"
+			title = ""
+			weight = 5
+		[[languages.zh-tw.menu.main]]
+			identifier = "project"
+			pre = ""
+			post = ""
+			name = "作品"
+			url = "/project/"
+			title = ""
+			weight = 6
+  [languages.en]
+    weight = 2
+    title = "Arthur's Blog"
+    languageCode = "en"
+    languageName = "English"
+		[languages.en.params.home.profile]
+		# subtitle shown in home page
+		subtitle = "Every problem has a solution; it just takes the right mindset to discover it"
+    [[languages.en.menu.main]]
+      identifier = "posts"
+      pre = ""
+      post = ""
+      name = "Posts"
+      url = "/posts/"
+      title = ""
+      weight = 1
+    [[languages.en.menu.main]]
+      identifier = "tags"
+      pre = ""
+      post = ""
+      name = "Tags"
+      url = "/tags/"
+      title = ""
+      weight = 2
+    [[languages.en.menu.main]]
+      identifier = "categories"
+      pre = ""
+      post = ""
+      name = "Categories"
+      url = "/categories/"
+      title = ""
+      weight = 3
+    [[languages.en.menu.main]]
+      identifier = "authors"
+      pre = ""
+      post = ""
+      name = "authors"
+      url = "/authors/"
+      title = ""
+      weight = 4
+    [[languages.en.menu.main]]
+      identifier = "about"
+      pre = ""
+      post = ""
+      name = "experience"
+      url = "/about/"
+      title = ""
+      weight = 5
+   [[languages.en.menu.main]]
+      identifier = "project"
+      pre = ""
+      post = ""
+      name = "project"
+      url = "/project/"
+      title = ""
+      weight = 6
+  

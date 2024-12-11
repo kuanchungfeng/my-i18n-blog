@@ -1,0 +1,423 @@
+---
+title: "Demystify JasperReports"
+date: 2021-02-26T18:35:04+08:00
+draft: false
+categories:
+  - "JasperReports"
+tags:
+  - "JasperReports"
+  - "Report Design"
+authors: [Arthur]
+toc: true
+---
+
+:experimental:
+:icons: font
+:sectnums:
+:sectnumlevels:
+:source-highlighter: prettify
+:toc: left
+:toclevels:
+:toc-title: 大綱
+:sectanchors:
+
+== Introduction
+
+* An **open-source** library developed for Java
+
+* Develop extensible dynamic reports
+
+* Features include tables, charts, maps, sub-reports, etc.
+
+* Supports exporting to various formats (docx, xls, odt, ods, pdf, html...)
+
+* Can provide data through various methods (csv, JDBC, json...)
+
+== Lifecycle
+
+* Design
+
+* Compile
+
+* Execution
+
+* Export
+
+image::/images/jasper-report/jasper-life-cycle.jpg[]
+
+== Development Thought Process
+
+. Understand user report requirements (whether printing is needed, if so, ask for paper size)
+
+[cols="a,a",options="header"]
+|===
+|Page Type |Dimensions in Pixels
+|A3 |842x1190
+|A4 |595x842
+|A5 |421x595
+|B4 |709x1002
+|B5 |501x709
+|===
+
+[start=2]
+. Consider the Bands to use
+
+. Set default Styles (remember to check Default Style)
+
+. Add Fields & Parameters to use
+
+. Consider whether to use Variables
+
+. Start designing the report (drag components to the screen)
+
+. Set properties
+
+== Band
+
+=== Introduction
+
+* Twelve Bands
+
+* Band width is 100%, height can be customized
+
+* Most Band heights will automatically expand (when encountering subReport, or when TextField exceeds), except for column Footer, page Footer, last Page Footer.
+
+* The total height of all Bands must be less than or equal to the full page height minus the top and bottom margins
+
+* Three main properties of Band are Height, Split Type, Print When Expression
+
+** Split Type, set how to arrange the Band when the remaining space on the page or column is insufficient to accommodate the Band.
+
+.Split Type
+[cols="a,a",options = "header"]
+|===
+|Split Type Property|Description
+|Stretch| default, if the actual height is greater than the Band height, the excess part may be cut off.
+|Prevent| Avoid being cut off, move the entire Band to the next page or next column, but if the next page or next column is still not high enough, it will still be cut off.
+|Immediate| Immediately cut off, the part that cannot fit on the current page or column is moved to the next page or next column, and the Band will be split into more than two parts.
+|===
+
+=== Band Introduction
+
+.Band Introduction
+[cols="a,a",options="header"]
+|===
+|Band Name |Description
+|Title| Title, appears only at the top of the first page of the report.
+|Page Header| Page header, appears at the top of every page of the report, except the first page is below the Title, and the page header of other pages is at the top. (If Summary On A New Page is selected, the last page will not appear)
+|Column Header| Column header, generally used to place column names.
+|Group Header| Group header, appears if a Group is set, between Column Header and Detail.
+|Detail| The content of the report, the actual content to be presented is placed here. Detail allows multiple Bands (Detail1, Detail2, .. Detail n).
+|Group Footer| Group footer, appears if a Group is set, between Detail and Column Footer. If more than one group is defined, the group footer appears in reverse order of group definition (Group3, Group2, Group1).
+|Column Footer| Column footer, appears below the Detail of each page. (If Float Column Footer is set, it will dynamically appear below the Detail of the last page)
+|Page Footer| Page footer, appears at the bottom of each page.
+|Last Page Footer| Last page footer, if set, will replace the Page Footer of the last page.
+|Summary| Appears below the Detail of the last page of the report, can be used to place some statistics.
+|No Data| No data section, appears when there are 0 records and When No Data Type is set to No Data Section.
+|Background| Used to create watermarks. The background part will appear on every page and cannot overflow to the next page. Elements placed in this part are evaluated when the page is initialized and displayed in the background. All other page objects are displayed on top of the background objects. Used to create watermarks.
+|===
+
+== Fields & Parameters
+
+Fields: Used to display data retrieved from the Datasource
+
+* Three main properties of Fields
+
+** Name (field name)
+
+** Class (type)
+
+** Description (description)
+
+Parameters: Some parameters passed from the outside, can be used in title strings, print dates, boolean values for judgment, etc.
+
+* Properties of Parameters
+
+** Name (parameter name, the variable name passed from the backend)
+
+** Class (type)
+
+** Description (description, optional)
+
+** Is for Prompting (if unchecked, the parameter will not be requested when previewing with Preview)
+
+** Default Value Expression (default expression)
+
+** Evaluation Time (determines when to execute the default expression before or after the connection)
+
+*** Early: Execute the default expression before the connection
+
+*** Late: Execute the default expression after the connection
+
+== Variables
+
+Variables: Used to store the result of calculating an expression, can be used for statistics, passing parameters to sub-reports.
+
+* Properties of Variables
+
+** Name (parameter name, screen component Expression uses [$V{Name}])
+
+** Value Class Name (class)
+
+** Calculation (how to calculate the expression)
+
+*** Calculation can only perform numerical calculations
+
+.Calculation
+[cols="a,a",options = "header"]
+|===
+|Calculation Property|Description
+|Nothing| Do not perform any calculations, directly print the value based on the expression, can use this for simple operations (e.g., $P{a}+$P{b}, but can only calculate numeric types)
+|Count| Count the number of records
+|Distinct Count| Count the number of unique records
+|Sum| Sum the values of the data
+|Average| Average value of the accumulated results
+|Lowest| Minimum value of the expression
+|Highest| Maximum value of the expression
+|StandardDeviation| Return the standard deviation based on all values of the expression
+|Variance| Return the variance based on all values of the expression
+|System| Can control the calculation method by yourself (e.g., using Java programs)
+|===
+
+** Expression (variable used for calculation)
+
+** Initial Value Expression (initial value of the Variable, if not given, it points to the value of the Expression)
+
+** Increment Type (when to calculate the Variable)
+
+.Increment Type
+[cols="a,a",options = "header"]
+|===
+|Increment Type Property|Description
+|Report| Calculate only once at the end of the report
+|Page| Calculate once on each page (calculate once after each Page Header)
+|Column| Calculate once in each column (calculate once after each Column Header)
+|Group| Calculate once in each group, need to set Group
+|None| Calculate for each record
+|===
+
+** Reset Type (when the Variable will be reset, need to set Initial Value Expression, if not given, reset will become null)
+
+.Reset Type
+[cols="a,a",options = "header"]
+|===
+|Reset Type Property|Description
+|Report| Reset only when the report is created
+|Page| Reset once on each page (reset once for each Page Header)
+|Column| Reset once in each column (reset once for each Column Header)
+|Group| Reset once in each group, need to set Group
+|None| Variable will not be reset, so no need to set Initial Value Expression
+|===
+
+** Incrementer Factory Class Name (a Java class used to customize the calculation, need to implement the net.sf.jasperreports.engine.fill.JRIncrementerFactory interface)
+
+*** If your Variable's Value Class Name is java.lang.Integer, but your Expression returns a string type value, the value of this variable will be **0**
+
+[start=1]
+* Built-in Variables in JasperReports
+
+** Built-in Variables can be used directly but cannot be modified
+
+.Built-in Variables
+[cols="a,a",options = "header"]
+|===
+|Variable Name|Description
+|REPORT_COUNT| The number of records in the report so far (can use this for serial numbers)
+|PAGE_NUMBER| Can display the current page number, or the total number of pages in the report (depending on whether the TextField's evaluationTime property is set to Now or Report to decide what to display)
+|COLUMN_NUMBER| The current column number (usually there is only one column per page, so it is 1, useful when there are multiple columns per page)
+|PAGE_COUNT| The number of records on the current page (the number of records in the Detail between the current Page Header and Page Footer)
+|COLUMN_COUNT| The number of records in the current column (the number of records in the Detail between the current Column Header and Column Footer)
+|===
+
+== Subreport
+
+=== Introduction
+Sometimes when you need to merge cells in a table, or have a one-to-many data structure, you can use sub-reports to present it.
+
+==== Two main benefits of sub-reports
+
+. Modular reports
+. Can connect to different data sources
+
+=== Subreport Properties
+
+* Run To Bottom (if selected true, the sub-report will fill the entire page, suitable for sub-reports with one record per page)
+
+* Overflow Type (determine whether the sub-report should exceed the height of the main report)
+
+* Using Cache (whether to cache)
+
+* Connection Expression or Datasource Expression (data source, can be directly connected to DB or use JRBeanCollectionDataSource to pass data)
+
+* Parameters Map Expression (can pass a Map as a parameter)
+
+* Edit Return Values (data returned by the sub-report, usually used to pass totals or counts)
+
+* Edit Parameters (data passed into the sub-report, can be used to identify ID)
+
+* Expression (source file of the sub-report, use string to record)
+
+Subreport Expression judgment order
+
+. URL
+
+. File name in the same directory
+
+. Add absolute path of the file
+
+.. Cannot use relative path
+
+=== Parameter Passing
+
+Parameter passing can be divided into **passing parameters from the main report to the sub-report** and **passing parameters from the sub-report back to the main report**
+
+==== Passing parameters from the main report to the sub-report
+
+image::/images/jasper-report/sub-report-parameter.jpg[]
+
+- Parameter Name: Enter the parameter name
+- Parameter Expression: Enter the parameter content, the expression can be a string, number, parameter, variable, etc. As shown below:
+
+image::/images/jasper-report/sub-report-parameter-add.jpg[]
+
+==== Passing parameters from the sub-report back to the main report
+
+image::/images/jasper-report/sub-report-parameter-return.jpg[]
+
+Returning parameters requires setting two variables, one in the main report and one in the sub-report, as shown below:
+
+image::/images/jasper-report/sub-report-parameter-return-add.jpg[]
+
+Sub-report variable
+
+- Change Value Class Name to the same class as the variable set in the main report
+- Calculation depends on whether you need to perform calculations, here it is to calculate the total of a certain field
+- Expression is the field to be summed, can use ternary operator for if judgment
+- Initial Value Expression can set the initial value, for example, I set it to 0 here
+
+image::/images/jasper-report/sub-export-variable.jpg[]
+
+Main report variable
+- Change Value Class Name to the same class as the variable set in the sub-report
+- Set Increment type and Reset type to Report
+
+image::/images/jasper-report/main-report-variable.jpg[]
+
+TIP: The TextField in the main report that holds the return variable should have its Evaluation Time set to Band, as shown below:
+
+image::/images/jasper-report/return-text-field.jpg[]
+
+== Problem Sharing
+
+. If you only need to generate reports such as certificates or application forms with only parameters, put all the content in the Title Band, and set the Jasper Report's When No Data Type to *All Sections No Detail*
+
+. Sometimes the excel table automatically jumps to the next page after a certain number of rows, if you don't want it to automatically jump to the next page, check *Ignore Pagination* in the main settings of the report, then it won't automatically jump to the next page after a few rows. As shown below:
+
+image::/images/jasper-report/jasper-pagination.jpg[]
+
+[start=3]
+. If you want to generate dynamic column reports, you can set the Print When Expression in Appearance to a boolean condition to decide whether to display the column, as shown below:
+
+image::/images/jasper-report/print-when-expression.jpg[]
+
+[start=4]
+. If you want a TextField to have different font sizes or colors
+
+- First change the markUp in the TextField to html, as shown below:
+
+image::/images/jasper-report/jasper-markup.jpg[]
+
+- Add <font></font> in the Expression, as shown below:
+
+image::/images/jasper-report/font-example.jpg[]
+
+* You can also use <span style='font-size:16px;'>
+
+[start=5]
+. If the TextField is right-aligned and too close to the right border, you can use right Indent to adjust the px closer to the right, as shown below:
+
+image::/images/jasper-report/right-indent.jpg[]
+
+[start=6]
+. How to add solid square &#9632; or hollow square &#9633; in jasper?
+
+* Change the markup of the textField to html, as shown below:
+
+image::/images/jasper-report/jasper-markup.jpg[]
+
+* Use html Geometric Shapes in the expression
+
+Refer to https://www.w3schools.com/charsets/ref_utf_geometric.asp[UTF-8 Geometric Shapes]
+
+[start=7]
+. How to make each field in the detail the same length and height as the highest field?
+
+- One way is to use an ElementGroup
+
+- Another way is to change these properties
+
+----
+1. Set "Position" to "Float"
+2. Set "Stretch Type" to "ContainerBottom"
+3. Check "Print when detail overflows" checkbox.
+4. Check the "Stretch with overflow" checkbox.
+----
+
+[start=8]
+. Line break
+
+- staticText field
+
+.. Double-click the field, Shift + Enter for line break
+
+- textField
+
+.. Add "\n"
+.. Change Markup to html, use <br>
+
+[start=9]
+. How to make the numbers of Field, Parameter, Variable have a comma every three digits? (e.g., 1000->1,000)
+
+.. Add the DecimalFormat method format to the TextField's Expression, as shown below:
+
+image::/images/jasper-report/number-with-common.jpg[]
+
+[start=10]
+. Background color modification
+
+* Almost every Element has a common property - Backcolor (background color), but if you find that the screen does not change after modification, it may be because Transparent (transparent) is selected, remember to **uncheck** the transparent checkbox below, as shown below:
+
+image::/images/jasper-report/transparent.jpg[]
+
+[start=11]
+. When generating a table with merged cells, you may encounter the problem of line breaks in the middle of the page.
+
+Change the *Split Type* of the Detail Band to *Prevent*, this will solve the problem of sub-report page break misalignment.
+
+image::/images/jasper-report/sub-report-question-solve.jpg[]
+
+[start=12]
+. If you use the same JRBeanCollectionDataSource for two sub-reports, the first sub-report will get the value, but the second one will not. In this case, change the data parameter of the sub-report to use a list, as follows:
+
+In Java
+[source=java]
+----
+paramsMap.put("statsData", summaryList);
+----
+
+In jrxml
+[source=jrxml]
+----
+<parameter name="statsData" class="java.util.List"/>
+...
+<subreportParameter name="statsData">
+  <subreportParameterExpression>
+    <![CDATA[new net.sf.jasperreports.engine.data.
+JRBeanCollectionDataSource($P{statsData})]]>
+  </subreportParameterExpression>
+</subreportParameter>
+...
+----
+
+This problem is referenced from
+https://www.hellojava.com/a/54282.html

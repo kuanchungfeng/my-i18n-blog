@@ -1,0 +1,448 @@
+---
+title: "用烤肉來看工廠模式(上)"
+date: 2021-09-08T18:35:04+08:00
+draft: false
+categories:
+  - "DesignPattern"
+tags:
+  - "DP"
+  - "工廠模式"
+authors: [Arthur]
+toc: true
+---
+
+:experimental:
+:icons: font
+:sectnums:
+:sectnumlevels:
+:source-highlighter: prettify
+:toc: left
+:toc-title: 目錄
+:sectanchors:
+
+
+== 工廠模式三大類
+
+. 簡單工廠模式(Simple Factory)
+
+. 工廠方法模式(Factory Method)
+
+. 抽象工廠模式(Abstract Factory)
+
+在認識三大工廠之前，先來看看以下情境。
+
+== 情境
+
+中秋節快到了，又到了萬家烤肉萬家香的時候，這時候你決定到全聯買烤肉用品，你列了一張代購清單：
+
+* [ ] 烤肉架
+* [ ] 木炭
+* [ ] 牛肉
+* [ ] 豬肉
+* [ ] 雞肉
+
+== 基本物件介紹
+
+=== 最重要的肉
+
+[source=java]
+----
+public abstract class Meat {
+
+    private String name;
+
+    private int oz;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getOz() {
+        return oz;
+    }
+
+    public void setOz(int oz) {
+        this.oz = oz;
+    }
+
+    public Meat(String name) {
+        this.name = name;
+    }
+
+    public Meat(){
+
+    }
+}
+----
+
+=== 牛肉
+
+[source=java]
+----
+public class Beef extends Meat{
+
+    public Beef(String name) {
+        super(name);
+    }
+}
+----
+
+=== 雞肉
+
+[source=java]
+----
+public class Chicken extends Meat{
+
+    public Chicken(String name) {
+        super(name);
+    }
+}
+----
+
+=== 豬肉
+
+[source=java]
+----
+public class Pork extends Meat{
+
+    public Pork(String name) {
+        super(name);
+    }
+}
+----
+
+你抱著期待的心到全聯，準備大買特買，發現全聯有出烤肉組合包，立馬手刀購買
+
+=== 全聯
+
+[source=java]
+----
+public class PXMarket {
+
+    // 烤肉組合包
+    public static void barbecueItemSet(){
+        buy("烤肉架");
+        buy("木炭");
+        buy(orderBarbecue("牛肉").getName());
+        buy(orderBarbecue("豬肉").getName());
+        buy(orderBarbecue("雞肉").getName());
+
+    }
+
+    static Meat orderBarbecue(String meatType){
+        if(meatType.equals("牛肉")){
+            return new Beef("和牛");
+        }else if(meatType.equals("雞肉")){
+            return new Chicken("土雞");
+        }else {
+            return new Pork("伊比利豬");
+        }
+    }
+
+    public static void buy(String item){
+        System.out.println("買到"+item+"了");
+    }
+}
+----
+
+買完回家，開始烤肉
+
+----
+ //程式進入點
+    public static void main(String[] args) {
+        PXMarket.barbecueItemSet();
+        System.out.println("回家開烤");
+    }
+----
+
+
+image::/images/factory/first-barbecue.png[第一次烤肉結果,500,title="第一次烤肉結果"]
+
+
+== 請支援收銀
+
+因為組合包很熱銷，客戶絡繹不絕的來買，全聯的廣播不斷出現：「請支援收銀」，全聯決定將點肉的業務外包出去。
+
+== 簡單工廠模式
+
+[source=java]
+----
+public class SimpleMeatFactory {
+
+    public static Meat orderBarbecue(String meatType){
+        if(meatType.equals("牛肉")){
+            return new Beef("和牛");
+        }else if(meatType.equals("雞肉")){
+            return new Chicken("土雞");
+        }else {
+            return new Pork("伊比利豬");
+        }
+    }
+}
+----
+
+全聯的服務只剩單純的組合包功能，將點肉服務外包給簡單肉工廠。
+
+[source=java]
+----
+public class PXMarket {
+
+    // 烤肉組合包
+    public static void barbecueItemSet(){
+        buy("烤肉架");
+        buy("木炭");
+        buy(SimpleMeatFactory.orderBarbecue("牛肉").getName());
+        buy(SimpleMeatFactory.orderBarbecue("豬肉").getName());
+        buy(SimpleMeatFactory.orderBarbecue("雞肉").getName());
+    }
+
+    public static void buy(String item){
+        System.out.println("買到"+item+"了");
+    }
+}
+----
+
+簡單工廠負責管理物件的創造，如果client端要取得物件，只要給簡單工廠正確的參數即可。
+
+== 想吃烤鯖魚
+
+吃完了烤肉以後，突然想吃烤鯖魚，你又到全聯點肉，簡單肉工廠為了你加了魚肉到商品列。
+
+[source=java]
+----
+public class Fish extends Meat{
+
+    public Fish(String name) {
+        super(name);
+    }
+}
+----
+
+並將魚肉放到菜單上
+
+[source=java]
+----
+public class SimpleMeatFactory {
+
+    public static Meat orderBarbecue(String meatType){
+        if(meatType.equals("牛肉")){
+            return new Beef("和牛");
+        }else if(meatType.equals("雞肉")){
+            return new Chicken("土雞");
+        }else if(meatType.equals("魚肉")){
+            return new Fish("鯖魚");
+        }else {
+            return new Pork("伊比利豬");
+        }
+    }
+}
+----
+
+全聯新增賣魚服務
+
+----
+   public static void buyFish(){
+        buy(SimpleMeatFactory.orderBarbecue("魚肉").getName());
+    }
+----
+
+買完魚開烤
+
+----
+    //程式進入點
+    public static void main(String[] args) {
+        PXMarket.buyFish();
+        System.out.println("回家開烤");
+    }
+----
+
+全聯覺得這樣下去不行，每次有客人想要點不同種的肉，它們都要及時修改商品列和菜單，並且這樣違反了OCP法。
+
+== 工廠方法模式
+
+全聯決定與各自的肉工廠合作，於是全聯訂了一個介面，讓想要合作的肉工廠來找它們簽約。
+
+[source=java]
+----
+public interface MeatMethodFactory {
+
+    Meat orderMeat();
+
+}
+----
+
+之前合作的肉工廠紛紛來簽約
+
+=== 牛肉工廠
+
+[source=java]
+----
+public class BeefFactory implements MeatMethodFactory{
+
+    @Override
+    public Meat orderMeat() {
+        return new Beef("和牛");
+    }
+}
+----
+
+=== 雞肉工廠
+
+[source=java]
+----
+public class ChickenFactory implements MeatMethodFactory{
+
+    @Override
+    public Meat orderMeat() {
+        return new Chicken("土雞");
+    }
+}
+----
+
+=== 豬肉工廠
+
+[source=java]
+----
+public class PorkFactory implements MeatMethodFactory{
+
+    @Override
+    public Meat orderMeat() {
+        return new Pork("伊比利豬");
+    }
+}
+----
+
+=== 魚肉工廠
+
+[source=java]
+----
+public class FishFactory implements MeatMethodFactory{
+
+    @Override
+    public Meat orderMeat() {
+        return new Fish("鯖魚");
+    }
+}
+----
+
+簽約完以後，全聯準備了一台iphone，專門為了跟工廠叫肉。
+
+----
+    public static Meat callFactory(MeatMethodFactory factory){
+        return factory.orderMeat();
+    }
+----
+
+之前的買魚服務，只要呼叫對應廠商就可以叫魚了。
+
+----
+    public static void buyFish(){
+        FishFactory fishFactory = new FishFactory();
+        buy(callFactory(fishFactory).getName());
+    }
+----
+
+**工廠方法模式**定義了一個建立物件的介面，但由子類決定要實例化的類別為何。工廠方法讓類別把 **實例化** 的動作推遲到了子類
+
+== 走私越南豬肉
+
+近期國內查獲走私越南豬肉，全聯決定分成國產肉工廠和進口肉工廠，只是想到要重新跟肉工廠簽約，全聯就很頭大。
+
+== 抽象工廠模式
+
+全聯後來決定分成國產肉工廠和進口肉工廠，每間肉工廠必須至少供應牛、雞、豬、魚，於是它們又訂了新的介面。
+
+[source=java]
+----
+public interface AbstractFactory {
+
+    public Beef supplyBeef();
+
+    public Chicken supplyChicken();
+
+    public Pork supplyPork();
+
+    public Fish supplyFish();
+}
+----
+
+=== 國產肉工廠
+
+[source=java]
+----
+public class DomesticFactory implements AbstractFactory{
+    @Override
+    public Beef supplyBeef() {
+        return new Beef("國產牛肉");
+    }
+
+    @Override
+    public Chicken supplyChicken() {
+        return new Chicken("國產雞肉");
+    }
+
+    @Override
+    public Pork supplyPork() {
+        return new Pork("國產豬肉");
+    }
+
+    @Override
+    public Fish supplyFish() {
+        return new Fish("國產鯖魚");
+    }
+}
+----
+
+=== 進口肉工廠
+
+[source=java]
+----
+public class ImportFactory implements AbstractFactory{
+    @Override
+    public Beef supplyBeef() {
+        return new Beef("進口和牛");
+    }
+
+    @Override
+    public Chicken supplyChicken() {
+        return new Chicken("進口雞肉");
+    }
+
+    @Override
+    public Pork supplyPork() {
+        return new Pork("進口豬肉");
+    }
+
+    @Override
+    public Fish supplyFish() {
+        return new Fish("進口鯖魚");
+    }
+}
+----
+
+=== 烤肉包組合
+
+----
+    public static void barbecueItemSet(){
+        DomesticFactory domesticFactory = new DomesticFactory();
+        buy("烤肉架");
+        buy("木炭");
+        buy(domesticFactory.supplyBeef().getName());
+        buy(domesticFactory.supplyChicken().getName());
+        buy(domesticFactory.supplyPork().getName());
+
+    }
+----
+
+耶!!吃到國產豬肉了，不用擔心吃到有病毒的烤肉了
+
+image::/images/factory/last-barbecue.jpg[最後一次烤肉結果,500,title="最後一次烤肉結果"]
+
+**抽象工廠模式**定義一個創建 **產品族** 的介面，產品族裡面每個產品的具體類別由繼承抽象工廠的實體工廠決定。
+
+https://github.com/kuanchungfeng/factory[gitHub程式碼,window=_blank]
+

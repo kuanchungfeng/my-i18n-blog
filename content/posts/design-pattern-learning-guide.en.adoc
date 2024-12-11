@@ -1,0 +1,196 @@
+---
+title: "Design Patterns Learning Map"
+date: 2021-09-07T22:53:34+08:00
+draft: false
+categories:
+  - "DesignPattern"
+tags:
+  - "DP"
+authors: [Arthur]
+toc: true
+---
+
+:toc-title: 目錄
+:toc: left
+
+== Preface
+
+Before learning design patterns, it is best to have a certain understanding of **OO (Object-Oriented)** related knowledge, so that you can quickly understand the operation mechanism of each design pattern. The following diagram is a map of background knowledge for design patterns:
+
+image::/images/design-pattern/design-pattern-learning-map.jpg[Background Knowledge Map for Design Patterns]
+
+=== Three Major Characteristics of Object-Oriented
+
+The three major characteristics of object-oriented (inheritance, encapsulation, polymorphism) are the core of object-oriented, and almost every design pattern uses object-oriented characteristics.
+
+==== Inheritance
+
+Inheritance allows you to create classes based on **other** classes, avoiding repetitive and recurring code. The time to use **inheritance** is when the **behavior** of one object is similar to the **behavior** of another object, not just because the IS-A relationship is established.
+
+==== Encapsulation
+
+Encapsulation hides the implementation of a class, making it easy to use and change. Encapsulation allows a class to provide services to its users in a **black box** manner, but does not open the code for users to change or use it incorrectly. Encapsulation is a key technology for following OCP.
+
+==== Polymorphism
+
+Polymorphism is closely related to inheritance. When a class inherits another class, polymorphism allows the subclass to replace the parent class. Polymorphism allows different objects to execute the same method, but through their own implementation code.
+
+== Object-Oriented Design Principles
+
+Object-oriented principles are tools or techniques that can be applied to design or write code, making the code more maintainable, flexible, or extensible.
+
+=== SOLID
+
+**Robert C. Martin (Uncle Bob)** proposed in 2009 to classify five object-oriented design principles into SOLID.
+
+==== Single Responsibility Principle (SRP)
+
+Every object in the system should have a single responsibility, and all object services should focus on achieving a single responsibility.
+
+==== Open-Closed Principle (OCP)
+
+Classes should be open for extension but closed for modification.
+
+==== Liskov Substitution Principle (LSP)
+
+Subtypes must be able to replace their base types.
+
+- Inheritance must ensure that the characteristics (attributes and methods) of the parent type still hold for the subtype.
+
+- A reasonable inheritance relationship is established when the subclass can replace the parent class.
+
+==== Interface Segregation Principle (ISP)
+
+Split overly large interfaces into smaller and more specific ones. Clients should not be forced to implement methods they do not use.
+
+- The purpose is to decouple.
+
+==== Dependency Inversion Principle (DIP)
+
+. High-level modules should not depend on low-level modules. Both should depend on abstractions.
+
+. Abstractions should not depend on details. Details should depend on abstractions.
+
+=== Law of Demeter (LoD)
+
+If two classes do not need to communicate directly, then they should not have direct interaction. If one class needs to call a method of another class, it can be forwarded through a third party.
+
+- Emphasizes that 'in the design structure of the class, each class should minimize the permissions of its members.'
+
+- Also known as the principle of least knowledge.
+
+=== Program to an Interface, Not an Implementation
+
+Programming should be done to the supertype. This is the plain language meaning of the dependency inversion principle mentioned above.
+
+=== Favor Object Composition Over Class Inheritance
+
+Using composition is much more flexible than inheritance. It allows you to encapsulate algorithms into classes and 'dynamically change behavior at runtime.'
+
+=== UML
+
+UML (Unified Modeling Language) describes the class collection of the system, the attributes of the classes, and the relationships between the classes.
+
+==== Class Diagram
+
+A class diagram allows you to see at a glance what the class is called, what attributes and methods it has, and clearly express what the class is supposed to do.
+
+==== Associations in Class Diagrams
+
+Associations between classes allow you to see at a glance the reference relationships between two classes (objects).
+
+=== Three Alternatives to Inheritance
+
+==== Inheritance vs. Composition
+
+**Composition** allows you to use behaviors from 'a group of other classes' and switch those behaviors at runtime.
+
+==== Inheritance vs. Delegation
+
+**Delegation** is the responsibility of delegating specific work to another class or method.
+
+==== Inheritance vs. Generics
+
+**Generics** allow you to use other types without specifying them explicitly, and bring them into methods or classes as **parameters** when actually used.
+
+== Design Pattern Reading Order
+
+Joshua Kerievsky hosted a design pattern reading group for about three years and proposed a reading order for design patterns:
+
+Factory Method -> Strategy -> Decorator -> Composite -> Iterator -> Template Method -> Abstract Factory -> Builder -> Singleton -> Proxy -> Adapter -> Bridge -> Mediator -> Observer -> Chain of Responsibility -> Memento -> Command -> Prototype -> State -> Visitor -> Flyweight -> Interpreter -> Facade
+
+== Eight Common Design Patterns
+
+If you think of 23 design patterns at once and want to give up, you can start with the simplest and most common eight design patterns:
+
+. Abstract Factory
+
+. Adapter
+
+. Composite
+
+. Decorator
+
+. Factory Method
+
+. Observer
+
+. Strategy
+
+. Template Method
+
+== Design Pattern Learning Resources (Books)
+
+There are many websites introducing design patterns on the internet, but they all talk about a certain design pattern individually. If you want to systematically see all the design patterns at once, here are recommended learning resources:
+
+=== Design Patterns: Elements of Reusable Object-Oriented Software
+
+- The original GoF design patterns book.
+
+- Detailed introduction to the purpose, motivation, structure, effects, implementation, and related patterns of each design pattern.
+
+- Because it is the original, the reading difficulty is relatively high.
+
+=== Head First Design Patterns
+
+- Uses visual, game-based, and question-based teaching to stimulate brain activity, making you unconsciously remember what you read.
+
+- Because it involves many brain-stimulating activities, the reading time is relatively long.
+
+- After more than 10 years, the second edition was finally released this September.
+
+=== Design Patterns Explained
+
+- Understand the relationship between design patterns and life through the dialogue of two engineers.
+
+- The reading experience is very relaxed, suitable for reading at any time.
+
+=== Agile Principles, Patterns, and Practices in C#
+
+- The author of Clean Code (Uncle Bob) uses design patterns to solve problems encountered in practical work.
+
+- The book introduces UML diagrams, design principles, and agile development.
+
+The last one is an online resource that includes all GoF design patterns, making it easy to quickly understand a new design pattern.
+
+=== Refactoring.Guru - Design Patterns
+
+- https://refactoring.guru/design-patterns[Link here]
+
+- Supports multiple languages (both human and programming languages).
+
+- Lists the essence of each design pattern, with relatively short reading time.
+
+[cols="^2,^1,^1,^1,^1"]
+|===
+|Book Title |Difficulty |Programming Language | Physical Book | E-book
+|Design Patterns: Elements of Reusable Object-Oriented Software (Collector's Edition)|★★★★★|C++|https://www.tenlong.com.tw/products/9789572054116[V,window=_blank]|http://moo.im/a/03fEGR[X,window=_blank]
+|Agile Principles, Patterns, and Practices in C#|★★★★|C#|https://www.books.com.tw/products/0010753373[V,window=_blank]|http://moo.im/a/acloMZ[X,window=_blank]
+|Refactoring.Guru - Design Patterns|★★★|Multiple||V
+|Head First Design Patterns (Second Edition)|★★|Java|https://www.books.com.tw/products/0010901056?sloc=main[V,window=_blank]|X
+|Design Patterns Explained|★|C#|X|X
+|===
+
+== Summary
+
+No matter which way you choose to learn design patterns, the most important thing is to **write code yourself**. Only by writing it once will you know how the design pattern works.

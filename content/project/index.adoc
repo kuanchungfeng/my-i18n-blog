@@ -1,0 +1,127 @@
+= 作品
+馮冠中 <kuanchungfeng@gmail.com>
+v1.0, 2022-08-17
+:experimental:
+:toc:
+:toclevels: 2
+:toc-title: 目錄
+:sectanchors:
+:sectlinks:
+:sectnums:
+:sectnumlevels: 1
+:source-highlighter: prettify
+:imagesdir: images
+
+
+
+== 電商網站(Mobile Site)
+
+* 網址：link:https://www.newegg.com/[Newegg,window=_blank]
+* 使用技術：React + TypeScript + Mobx
+* 參與項目：
+
+=== A/B Testing 商品推薦
+
+image::/images/project/abtesting.jpg[商品推薦]
+
+** 時間：2022/08
+** 規模：PG2，PM1，TE2，TM1，擔任PG
+
+=== 使用者瀏覽商品行為分析
+image::/images/project/user-behavior.jpg[使用者瀏覽商品行為分析]
+** 時間：2022/07~2022/08
+** 規模：PG1，PM1，TM1，擔任PG
+
+=== 產品明細頁面-QRCode顯示
+image::/images/project/pdp.jpg[QRCode顯示]
+** 時間：2022/07
+** 規模：PG2，PM1，TM1，擔任PG
+
+////
+==== 商品搜尋引擎體驗優化
+image::/images/project/search-engine.jpg[商品搜尋引擎體驗優化]
+** 時間：2022/05~2022/06
+** 規模：PG4，PM1，TE2，TM1，擔任PG
+////
+
+=== 最低價格標籤顯示
+image::/images/project/lowest-price.jpg[最低價格標籤顯示]
+** 時間：2022/04
+** 規模：PG3，PM1，TE1，TM1，擔任PG
+
+////
+==== 消費者商品回饋訊息系統
+image::/images/project/seller-message.jpg[消費者商品回饋訊息系統]
+** 時間：2022/02~2022/03
+** 規模：PG4，PM1，TE2，TM1，擔任PG
+////
+
+=== 前端遇到問題
+
+* 跨瀏覽器cookie 問題
+
+* import 陷阱
+
+* 重構多個元件邏輯成util
+
+* session storage與 local storage 應用
+
+=== 技術文章
+
+* 專有名詞整理
+
+* 第一次啟動專案指令教學
+
+* Confluence使用技巧
+
+* React Native debug tools 操作手冊
+
+* 第一次打包就上手
+
+== OLTP系統
+
+* 使用技術：Angular + TypeScript + Echarts + WebRTC
+* 參與項目：
+
+=== 首頁儀表板
+
+image::/images/project/dashboard.jpg[首頁儀表板]
+** 時間：2021
+** 規模：PG1，PM1，SA1，SD1，擔任PG，SD
+
+=== 伺服器監控系統
+
+image::/images/project/server.jpg[伺服器監控系統]
+** 時間：2021
+** 規模：PG1，PM1，SA1，SD1，擔任PG，SD
+
+=== 網頁掃描qrcode簽到系統
+
+image::/images/project/qrcode.png[顯示QRCode]
+
+image::/images/project/qrcode2.png[網頁掃描qrcode簽到系統]
+
+** 時間：2020
+** 規模：PG1，PM1，SD1，擔任PG，SD
+
+
+
+== 其他作品
+
+=== link:https://www.cakeresume.com/portfolios/app-e6011e[美食機器人APP,window=_blank]
+
+* 使用技術：Android + Java  
+
+image::/images/project/food.jpg[美食機器人APP]
+
+=== link:https://kuanchungfeng.github.io/[個人部落格,window=_blank]
+
+* 使用技術：hugo + Asciidoc + markdown
+
+image::/images/project/blog.jpg[個人部落格]
+
+=== link:https://www.cakeresume.com/portfolios/9b2c24[Line Bot解夢機器人,window=_blank]
+
+* 使用技術：python+heroku+linebot
+
+image::/images/project/dream.jpg[解夢機器人]

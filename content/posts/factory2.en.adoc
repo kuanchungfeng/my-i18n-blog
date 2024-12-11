@@ -1,0 +1,188 @@
+---
+title: "Explaining Factory Patterns Through Barbecue (Part 2)"
+date: 2021-09-14T21:31:47+08:00
+draft: false
+categories:
+  - "DesignPattern"
+tags:
+  - "DP"
+  - "Factory pattern"
+authors: [Arthur]
+toc: true
+---
+:experimental:
+:icons: font
+:sectnums:
+:sectnumlevels:
+:source-highlighter: prettify
+:toc: left
+:toc-title: 目錄
+:sectanchors:
+:hardbreaks-option:
+
+
+In the previous article, we looked at the context. In this article, we will discuss the five main components of the factory pattern:
+
+. Purpose
+
+. Timing
+
+. Structure
+
+. Roles
+
+. Effects
+
+== Simple Factory Pattern
+
+=== Purpose
+
+Use an input parameter to obtain different class objects.
+
+=== Timing
+
+- When the user only wants to obtain the corresponding object and does not want to know the details of how it is constructed.
+
+- When a method is too large and contains object initialization and other business logic.
+
+- When an object initialization method is called in multiple places.
+
+=== Structure
+
+image::/images/factory/simple-factory.png[]
+
+=== Roles
+
+- Client: Injects SimpleFactory to obtain objects.
+
+- SimpleFactory: Generates various objects based on the parameters.
+
+- AbstractProduct: The abstract aspect of all objects.
+
+- ConcreteProduct: Each specific object.
+
+=== Effects
+
+==== Advantages
+
+. Delegates the responsibility of creating objects to the factory, so the client does not need to create product objects themselves.
+
+. The client does not need to know all class names, only the parameters to be passed in, reducing the user's memory load for complex classes.
+
+. By placing parameters in configuration files, the specific objects used can be changed without modifying the code, increasing system flexibility.
+
+==== Disadvantages
+
+. Violates the open-closed principle; whenever there is a new product, the factory logic must be modified, which is not conducive to system expansion and maintenance.
+
+. If there is a bug in the simple factory logic, the entire system will be affected.
+
+== Factory Method Pattern
+
+=== Purpose
+
+Define an interface for creating objects, but let subclasses decide which class to instantiate. The factory method pattern lets a class defer instantiation to subclasses.
+
+=== Timing
+
+- When a class cannot clearly specify the object to be created.
+
+- When a class wants to let subclasses specify the type of object to be created.
+
+- When a class delegates the power (overriding methods) to one or more subclasses for specific purposes, and you want to manage all delegated powers uniformly.
+
+=== Structure
+
+image::/images/factory/factory-method.png[]
+
+=== Roles
+
+- Product: Defines the interface for objects created by the factory method.
+
+- ConcreteProduct: Specific implementation of the Product interface.
+
+- Creator: Declares the factory method, returning an object of type Product. By default, it returns a ConcreteProduct object (it may also return a Product object).
+
+- ConcreteCreator: Overrides the factory method to return a specific ConcreteProduct.
+
+=== Effects
+
+==== Advantages
+
+. When adding new products, only the corresponding concrete factory and concrete product need to be added, conforming to the open-closed principle.
+
+. The factory method pattern encapsulates the details of specific product implementations, so the client only needs to care about the corresponding factory.
+
+. The factory method pattern can first write a default factory method, leaving hooks for subclasses to extend functionality.
+
+==== Disadvantages
+
+. The number of classes in the system increases in pairs, increasing system complexity and maintenance costs.
+
+. Considering system scalability, methods are defined at the Creator level, increasing system abstraction and understanding difficulty, and implementation difficulty.
+
+=== Spring Application
+
+Spring uses the factory method pattern to create bean objects, implemented through the **BeanFactory** and **ApplicationContext** interfaces.
+
+- BeanFactory: Lazy injection (injects when a bean is used), occupies less memory than ApplicationContext, and has a faster startup speed.
+
+- ApplicationContext: Creates all beans at once when the container starts, regardless of whether they are used or not.
+
+Although BeanFactory seems to have better performance, ApplicationContext extends all the functions of BeanFactory and provides additional features, so most developers use **ApplicationContext**.
+
+== Abstract Factory Pattern
+
+=== Purpose
+
+Use the same interface to create a family of related or dependent objects without specifying their concrete classes.
+
+=== Timing
+
+- When the system must be independent of the creation, composition, and representation of its products.
+
+- When the system configuration must be adjusted to work smoothly with various product families.
+
+- When a family of related objects must be used together, and you need to ensure they are not mismatched.
+
+- When you contribute a library but only want to expose interfaces, not implementation details.
+
+=== Structure
+
+image::/images/factory/abstract-factory.png[]
+
+=== Roles
+
+- AbstractFactory: Declares an interface for creating families of related objects.
+
+- ConcreteFactory: Implements the interface for creating families of related objects.
+
+- AbstractProduct: Declares an interface for a type of product object.
+
+- ConcreteProduct: Implements the interface for a type of product object.
+
+- Client: Communicates only with AbstractFactory and AbstractProduct interfaces.
+
+=== Effects
+
+==== Advantages
+
+. Associates related concrete classes.
+
+. Makes it easy to exchange entire product families.
+
+. Ensures consistency among products.
+
+==== Disadvantages
+
+. It is difficult to add new products to the product family.
+
+== Summary
+
+- Simple Factory: Used to produce any product in the same level structure. (When adding new products, the factory class must be modified. Conforms to the single responsibility principle. Does not conform to the open-closed principle.)
+
+- Factory Method: Used to produce fixed products in the same level structure. (Supports adding any product. When adding new products, the existing factory does not need to be changed, but a factory corresponding to the product needs to be added. Conforms to the single responsibility principle and the open-closed principle but introduces complexity.)
+
+- Abstract Factory: Used to produce all products in different product families. (When adding new products, the factory must be modified. When adding product families, a factory must be added. Conforms to the single responsibility principle, partially conforms to the open-closed principle, and reduces complexity.)
+
+**Each factory method has its own usage scenarios, advantages, and disadvantages. Finding the most suitable one according to the requirements is the best choice.**

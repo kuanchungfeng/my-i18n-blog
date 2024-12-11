@@ -1,0 +1,116 @@
+= Learning Journey
+Kuan-Chung Feng <kuanchungfeng@gmail.com>
+v1.0, 2021-06-29
+:experimental:
+:toc:
+:toclevels: 2
+:toc-title: Table of Contents
+:sectanchors:
+:sectlinks:
+:sectnums:
+:sectnumlevels: 1
+:source-highlighter: prettify
+:imagesdir: images
+
+== Projects
+
+[cols="3,5,2"]
+|===
+|Project|Technologies Used|Time
+|Digital Pathology System|Angular + Nx + Ngrx + TailwindCSS |2022/11~
+|E-commerce Platform|React + React Native|2021/12~2022/11
+|Government Central OLTP System|Spring Boot + Angular|2019/07~2021/12
+|Government Local OLTP System|Spring Boot + HTML + CSS + JS|2018/12~2021/12
+|===
+
+== Work Experience
+[cols="2,2,1"]
+|===
+|Company|Position|Time
+|aetherAI|Senior Frontend Engineer|2022/11~
+|Newegg Taiwan, Inc.|Web & App Engineer|2021/12~
+|Taiwan Information Technology Service Corporation|Program Analyst|2018/10~2021/12
+|===
+
+== Projects
+|===
+|Projects|Technologies Used|Time
+|link:https://kuanchungfeng.github.io/[Personal Blog (Arthur's Blog)]|HTML + CSS + Hugo|2021/9~
+|link:https://www.cakeresume.com/portfolios/app-e6011e[Food Robot APP,window=_blank]|Android|2019/5
+|link:https://www.cakeresume.com/portfolios/9b2c24[Line Bot Dream Interpreter,window=_blank]
+|Python + Heroku + Line Bot|2018/4
+
+|===
+
+== Courses
+
+|===
+|Course Name|Time|Platform
+|AI For Developers With GitHub Copilot, Cursor AI & ChatGPT|2024|Udemy
+|Ionic - Build iOS, Android & Web Apps with Ionic & Angular|2024|Udemy
+|Web Components & Stencil.js - Build Custom HTML Elements|2024|Udemy
+|GitLab CI/CD: Pipelines, CI/CD and DevOps for Beginners|2024|Udemy
+|Cypress End-to-End Testing - Getting Started|2023|Udemy
+|JavaScript Unit Testing - The Practical Guide|2023|Udemy
+|Docker & Kubernetes: The Practical Guide|2023|Udemy
+|Angular - The Complete Guide|2023|Udemy
+|Docker Deployment Beginner's Guide|2022|Hahow Online Courses
+|React Native - The Practical Guide [2022]|2022|Udemy
+|React - The Complete Guide (incl Hooks, React Router, Redux)|2022|Udemy
+|link:../java-course-web-certificate/[Java EE7 Frontend Web Application Development,window=_blank] |2021|Hengyi Education Training Center
+|Java Performance Tuning|2021|Hengyi Education Training Center
+|Docker Containers and Kubernetes System Administration|2021|Hengyi Education Training Center
+|Essential Spring Boot for Java Engineers|2021|Hahow Online Courses
+|Introduction to Interactive Web Effects (JS/CANVAS)|2020|Hahow Online Courses
+|Python Visual Recognition and Machine Learning|2020|Liancheng Computer
+|Python Data Visualization Development|2019|Liancheng Computer
+|Python Web Scraping Development|2019|Liancheng Computer
+|Redhat-Linux System Administration|2019|Liancheng Computer
+|Introduction to PHP Web Programming|2019|Liancheng Computer
+|HTML5 Frontend Syntax Application|2019|Liancheng Computer
+|Android Project Development|2019|Liancheng Computer
+|SQL Structured Query Language|2019|Liancheng Computer
+|Python Data Analysis Application II|2018|Liancheng Computer
+|Python Programming I|2018|Liancheng Computer
+|MySQL Database Management|2015|Liancheng Computer
+|Practical Android Application Development|2015|Liancheng Computer
+|Java OCP Certification Preparation Class|2015|Liancheng Computer
+|Advanced Java Programming|2015|Liancheng Computer
+|Basic Java Programming|2015|Liancheng Computer
+|===
+
+== Books
+
+|===
+|Book Title|Reading Time
+|The Art of Unit Testing| 2024
+|Introduction to Frontend Development Testing| 2024
+|Battle! Micro Frontend Architecture| 2024
+|Designing Interfaces| 2023
+|Unity Shader Essentials| 2023
+|Mastering RxJS| 2023
+|The Strongest of the Frontend Trio: Smart Development with Angular| 2023
+|UX Strategy| 2022
+|React Handbook| 2022
+|Thinking in React - From Hooks to Real-World Development| 2022
+|Object-Oriented Design Patterns (GOF)| 2021
+|Data Structures in Simple Terms| 2021
+|Enhancing Programmer's Interview Skills| 2021
+|Clean Code: A Handbook of Agile Software Craftsmanship| 2021
+|The Successful Software Developer's Career Handbook| 2021
+|Design Patterns in Simple Terms| 2021
+|Object-Oriented Analysis and Design in Simple Terms| 2020
+|Building and Implementing Angular| 2019
+|Java 8 Lambdas Technical Manual| 2019
+|Learn Git for Yourself| 2019
+|Google's Official Android Development Language: Master Kotlin| 2019
+|Kotlin in Simple Terms| 2019
+|PHP Handbook| 2019
+|Android Development in Simple Terms| 2019
+|Java SE8 Technical Manual| 2018
+|Java Programming in Simple Terms| 2018
+|Algorithm Illustrated Guide| 2018
+|SQL Practical Examples Dictionary| 2018
+|PMP in Simple Terms| 2018
+|Python Beginner's Training Camp| 2017
+|===

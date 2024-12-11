@@ -1,0 +1,125 @@
+= 作品
+馮冠中 <kuanchungfeng@gmail.com>
+v1.0, 2022-08-17
+:experimental:
+:toc:
+:toclevels: 2
+:toc-title: 目錄
+:sectanchors:
+:sectlinks:
+:sectnums:
+:sectnumlevels: 1
+:source-highlighter: prettify
+:imagesdir: images
+
+
+
+== E-commerce Website (Mobile Site)
+
+* URL: link:https://www.newegg.com/[Newegg,window=_blank]
+* Technologies used: React + TypeScript + Mobx
+* Projects involved:
+
+=== A/B Testing Product Recommendations
+
+image::/images/project/abtesting.jpg[Product Recommendations]
+
+** Time: 2022/08
+** Team size: 2 PG, 1 PM, 2 TE, 1 TM, Role: PG
+
+=== User Behavior Analysis
+image::/images/project/user-behavior.jpg[User Behavior Analysis]
+** Time: 2022/07~2022/08
+** Team size: 1 PG, 1 PM, 1 TM, Role: PG
+
+=== Product Detail Page - QRCode Display
+image::/images/project/pdp.jpg[QRCode Display]
+** Time: 2022/07
+** Team size: 2 PG, 1 PM, 1 TM, Role: PG
+
+////
+==== Search Engine Experience Optimization
+image::/images/project/search-engine.jpg[Search Engine Experience Optimization]
+** Time: 2022/05~2022/06
+** Team size: 4 PG, 1 PM, 2 TE, 1 TM, Role: PG
+////
+
+=== Lowest Price Tag Display
+image::/images/project/lowest-price.jpg[Lowest Price Tag Display]
+** Time: 2022/04
+** Team size: 3 PG, 1 PM, 1 TE, 1 TM, Role: PG
+
+////
+==== Consumer Product Feedback System
+image::/images/project/seller-message.jpg[Consumer Product Feedback System]
+** Time: 2022/02~2022/03
+** Team size: 4 PG, 1 PM, 2 TE, 1 TM, Role: PG
+////
+
+=== Frontend Issues Encountered
+
+* Cross-browser cookie issues
+
+* Import pitfalls
+
+* Refactoring multiple component logic into utils
+
+* Application of session storage and local storage
+
+=== Technical Articles
+
+* Terminology compilation
+
+* First-time project startup command tutorial
+
+* Confluence usage tips
+
+* React Native debug tools manual
+
+* Getting started with packaging
+
+== OLTP System
+
+* Technologies used: Angular + TypeScript + Echarts + WebRTC
+* Projects involved:
+
+=== Homepage Dashboard
+
+image::/images/project/dashboard.jpg[Homepage Dashboard]
+** Time: 2021
+** Team size: 1 PG, 1 PM, 1 SA, 1 SD, Role: PG, SD
+
+=== Server Monitoring System
+
+image::/images/project/server.jpg[Server Monitoring System]
+** Time: 2021
+** Team size: 1 PG, 1 PM, 1 SA, 1 SD, Role: PG, SD
+
+=== Web-based QRCode Check-in System
+
+image::/images/project/qrcode.png[QRCode Display]
+
+image::/images/project/qrcode2.png[Web-based QRCode Check-in System]
+
+** Time: 2020
+** Team size: 1 PG, 1 PM, 1 SD, Role: PG, SD
+
+== Other Projects
+
+=== link:https://www.cakeresume.com/portfolios/app-e6011e[Food Robot APP,window=_blank]
+
+* Technologies used: Android + Java  
+
+image::/images/project/food.jpg[Food Robot APP]
+
+=== link:https://kuanchungfeng.github.io/[Personal Blog,window=_blank]
+
+* Technologies used: hugo + Asciidoc + markdown
+
+image::/images/project/blog.jpg[Personal Blog]
+
+=== link:https://www.cakeresume.com/portfolios/9b2c24[Line Bot Dream Interpreter,window=_blank]
+
+* Technologies used: python + heroku + linebot
+
+image::/images/project/dream.jpg[Dream Interpreter Bot]

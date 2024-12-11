@@ -1,0 +1,479 @@
+---
+title: "Explaining Factory Patterns Through Barbecue (Part 1)"
+date: 2021-09-08T18:35:04+08:00
+draft: false
+categories:
+  - "DesignPattern"
+tags:
+  - "DP"
+  - "Factory pattern"
+authors: [Arthur]
+toc: true
+---
+
+:experimental:
+:icons: font
+:sectnums:
+:sectnumlevels:
+:source-highlighter: prettify
+:toc: left
+:toc-title: 目錄
+:sectanchors:
+
+
+== Three Types of Factory Patterns
+
+. Simple Factory Pattern
+
+. Factory Method Pattern
+
+. Abstract Factory Pattern
+
+Before understanding the three types of factories, let's look at the following scenario.
+
+== Scenario
+
+Mid-Autumn Festival is approaching, and it's time for barbecues. You decide to go to PX Mart to buy barbecue supplies and make a shopping list:
+
+* [ ] Barbecue grill
+* [ ] Charcoal
+* [ ] Beef
+* [ ] Pork
+* [ ] Chicken
+
+== Basic Object Introduction
+
+=== The Most Important Meat
+
+[source=java]
+----
+public abstract class Meat {
+
+    private String name;
+
+    private int oz;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getOz() {
+        return oz;
+    }
+
+    public void setOz(int oz) {
+        this.oz = oz;
+    }
+
+    public Meat(String name) {
+        this.name = name;
+    }
+
+    public Meat(){
+
+    }
+}
+----
+
+=== Beef
+
+[source=java]
+----
+public class Beef extends Meat{
+
+    public Beef(String name) {
+        super(name);
+    }
+}
+----
+
+=== Chicken
+
+[source=java]
+----
+public class Chicken extends Meat{
+
+    public Chicken(String name) {
+        super(name);
+    }
+}
+----
+
+=== Pork
+
+[source=java]
+----
+public class Pork extends Meat{
+
+    public Pork(String name) {
+        super(name);
+    }
+}
+----
+
+You excitedly go to PX Mart, ready to buy a lot, and find that PX Mart offers a barbecue package. You immediately buy it.
+
+=== PX Mart
+
+[source=java]
+----
+public class PXMarket {
+
+    // Barbecue package
+    public static void barbecueItemSet(){
+        // Buy barbecue grill
+        buy("烤肉架");
+        // Buy charcoal
+        buy("木炭");
+        buy(orderBarbecue("Beef").getName());
+        buy(orderBarbecue("Pork").getName());
+        buy(orderBarbecue("Chicken").getName());
+
+    }
+
+    static Meat orderBarbecue(String meatType){
+        if(meatType.equals("Beef")){
+            // Wagyu beef
+            return new Beef("和牛");
+        }else if(meatType.equals("Chicken")){
+            // Free-range chicken
+            return new Chicken("土雞");
+        }else {
+            // Iberian pork
+            return new Pork("伊比利豬");
+        }
+    }
+
+    public static void buy(String item){
+        // Buy {item}
+        System.out.println("買到"+item+"了");
+    }
+}
+----
+
+After buying, you go home and start barbecuing.
+
+----
+ // Program entry point
+    public static void main(String[] args) {
+        PXMarket.barbecueItemSet();
+        // Start grilling at home
+        System.out.println("回家開烤");
+    }
+----
+
+
+image::/images/factory/first-barbecue.png[First barbecue result,500,title="First barbecue result"]
+
+
+== Please Support the Cashier
+
+Because the barbecue package is very popular, customers keep coming to buy it. PX Mart's broadcast constantly says: "Please support the cashier". PX Mart decides to outsource the meat ordering business.
+
+== Simple Factory Pattern
+
+[source=java]
+----
+public class SimpleMeatFactory {
+
+    public static Meat orderBarbecue(String meatType){
+        if(meatType.equals("Beef")){
+            // Wagyu beef
+            return new Beef("和牛");
+        }else if(meatType.equals("Chicken")){
+            // Free-range chicken
+            return new Chicken("土雞");
+        }else {
+            // Iberian pork
+            return new Pork("伊比利豬");
+        }
+    }
+}
+----
+
+PX Mart's service now only includes the simple combination package function, outsourcing the meat ordering service to the Simple Meat Factory.
+
+[source=java]
+----
+public class PXMarket {
+
+    // Barbecue package
+    public static void barbecueItemSet(){
+        // Buy barbecue grill
+        buy("烤肉架");
+        // Buy charcoal
+        buy("木炭");
+        buy(SimpleMeatFactory.orderBarbecue("Beef").getName());
+        buy(SimpleMeatFactory.orderBarbecue("Pork").getName());
+        buy(SimpleMeatFactory.orderBarbecue("Chicken").getName());
+    }
+
+    public static void buy(String item){
+        // Buy {item}
+        System.out.println("買到"+item+"了");
+    }
+}
+----
+
+The simple factory is responsible for managing the creation of objects. If the client wants to obtain an object, they only need to provide the correct parameters to the simple factory.
+
+== Want to Eat Grilled Mackerel
+
+After finishing the barbecue, you suddenly want to eat grilled mackerel. You go to PX Mart to order meat, and the Simple Meat Factory adds fish to the product list for you.
+
+[source=java]
+----
+public class Fish extends Meat{
+
+    public Fish(String name) {
+        super(name);
+    }
+}
+----
+
+And adds fish to the menu
+
+[source=java]
+----
+public class SimpleMeatFactory {
+
+    public static Meat orderBarbecue(String meatType){
+        if(meatType.equals("Beef")){
+            // Wagyu beef
+            return new Beef("和牛");
+        }else if(meatType.equals("Chicken")){
+            // Free-range chicken
+            return new Chicken("土雞");
+        }else if(meatType.equals("Fish")){
+            // Mackerel
+            return new Fish("鯖魚");
+        }else {
+            // Iberian pork
+            return new Pork("伊比利豬");
+        }
+    }
+}
+----
+
+PX Mart adds fish to the service
+
+----
+   public static void buyFish(){
+        buy(SimpleMeatFactory.orderBarbecue("Fish").getName());
+    }
+----
+
+Buy fish and start grilling
+
+----
+    // Program entry point
+    public static void main(String[] args) {
+        PXMarket.buyFish();
+        // Start grilling at home
+        System.out.println("回家開烤");
+    }
+----
+
+PX Mart feels that this is not sustainable. Every time a customer wants to order a different type of meat, they have to modify the product list and menu in time, which violates the OCP principle.
+
+== Factory Method Pattern
+
+PX Mart decides to cooperate with various meat factories, so they set up an interface for meat factories that want to cooperate to sign a contract.
+
+[source=java]
+----
+public interface MeatMethodFactory {
+
+    Meat orderMeat();
+
+}
+----
+
+The previously cooperating meat factories come to sign contracts
+
+=== Beef Factory
+
+[source=java]
+----
+public class BeefFactory implements MeatMethodFactory{
+
+    @Override
+    public Meat orderMeat() {
+        // Wagyu beef
+        return new Beef("和牛");
+    }
+}
+----
+
+=== Chicken Factory
+
+[source=java]
+----
+public class ChickenFactory implements MeatMethodFactory{
+
+    @Override
+    public Meat orderMeat() {
+        // Free-range chicken
+        return new Chicken("土雞");
+    }
+}
+----
+
+=== Pork Factory
+
+[source=java]
+----
+public class PorkFactory implements MeatMethodFactory{
+
+    @Override
+    public Meat orderMeat() {
+        // Iberian pork
+        return new Pork("伊比利豬");
+    }
+}
+----
+
+=== Fish Factory
+
+[source=java]
+----
+public class FishFactory implements MeatMethodFactory{
+
+    @Override
+    public Meat orderMeat() {
+        // Mackerel
+        return new Fish("鯖魚");
+    }
+}
+----
+
+After signing the contracts, PX Mart prepares an iPhone specifically for ordering meat from the factories.
+
+----
+    public static Meat callFactory(MeatMethodFactory factory){
+        return factory.orderMeat();
+    }
+----
+
+The previous fish ordering service can now call the corresponding factory to order fish.
+
+----
+    public static void buyFish(){
+        FishFactory fishFactory = new FishFactory();
+        buy(callFactory(fishFactory).getName());
+    }
+----
+
+**Factory Method Pattern** defines an interface for creating an object, but lets subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses.
+
+== Smuggling Vietnamese Pork
+
+Recently, smuggled Vietnamese pork has been discovered domestically. PX Mart decides to split into domestic meat factories and imported meat factories, but the thought of re-signing contracts with meat factories gives them a headache.
+
+== Abstract Factory Pattern
+
+PX Mart later decides to split into domestic meat factories and imported meat factories. Each meat factory must supply at least beef, chicken, pork, and fish, so they set up a new interface.
+
+[source=java]
+----
+public interface AbstractFactory {
+
+    public Beef supplyBeef();
+
+    public Chicken supplyChicken();
+
+    public Pork supplyPork();
+
+    public Fish supplyFish();
+}
+----
+
+=== Domestic Meat Factory
+
+[source=java]
+----
+public class DomesticFactory implements AbstractFactory{
+    @Override
+    public Beef supplyBeef() {
+        // Domestic beef
+        return new Beef("國產牛肉");
+    }
+
+    @Override
+    public Chicken supplyChicken() {
+        // Domestic chicken
+        return new Chicken("國產雞肉");
+    }
+
+    @Override
+    public Pork supplyPork() {
+        // Domestic pork
+        return new Pork("國產豬肉");
+    }
+
+    @Override
+    public Fish supplyFish() {
+        // Domestic mackerel
+        return new Fish("國產鯖魚");
+    }
+}
+----
+
+=== Imported Meat Factory
+
+[source=java]
+----
+public class ImportFactory implements AbstractFactory{
+    @Override
+    public Beef supplyBeef() {
+        // Imported Wagyu
+        return new Beef("進口和牛");
+    }
+
+    @Override
+    public Chicken supplyChicken() {
+        // Imported chicken
+        return new Chicken("進口雞肉");
+    }
+
+    @Override
+    public Pork supplyPork() {
+        // Imported pork
+        return new Pork("進口豬肉");
+    }
+
+    @Override
+    public Fish supplyFish() {
+        // Imported mackerel
+        return new Fish("進口鯖魚");
+    }
+}
+----
+
+=== Barbecue Package Combination
+
+----
+    public static void barbecueItemSet(){
+        DomesticFactory domesticFactory = new DomesticFactory();
+        // Buy barbecue grill
+        buy("烤肉架");
+        // Buy charcoal
+        buy("木炭");
+        buy(domesticFactory.supplyBeef().getName());
+        buy(domesticFactory.supplyChicken().getName());
+        buy(domesticFactory.supplyPork().getName());
+
+    }
+----
+
+Yay!! Eating domestic pork, no need to worry about eating virus-infected barbecue.
+
+image::/images/factory/last-barbecue.jpg[Last barbecue result,500,title="Last barbecue result"]
+
+**Abstract Factory Pattern** defines an interface for creating families of related or dependent objects without specifying their concrete classes.
+
+https://github.com/kuanchungfeng/factory[GitHub code,window=_blank]

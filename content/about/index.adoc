@@ -1,0 +1,119 @@
+= 學習歷程
+馮冠中 <kuanchungfeng@gmail.com>
+v1.0, 2021-06-29
+:experimental:
+:toc:
+:toclevels: 2
+:toc-title: 目錄
+:sectanchors:
+:sectlinks:
+:sectnums:
+:sectnumlevels: 1
+:source-highlighter: prettify
+:imagesdir: images
+
+== 參與專案
+
+[cols="3,5,2"]
+|===
+|專案|使用技術|時間
+|數位病理系統|Angular + Nx + Ngrx+ TailwindCSS |2022/11~
+|電商平台|React + React Native|2021/12~2022/11
+|政府中央OLTP系統|Spring Boot+Angular|2019/07~2021/12
+|政府地方OLTP系統|Spring Boot+html+css+js|2018/12~2021/12
+|===
+
+== 工作經歷
+[cols="2,2,1"]
+|===
+|公司|職稱|時間
+|aetherAI 雲象科技|Senior Frontend Engineer|2022/11~
+|Newegg Taiwan, Inc.|Web & App Engineer|2021/12~
+|台灣資服科技股份有限公司|程式分析師|2018/10~2021/12
+|===
+
+== 作品
+|===
+|作品|使用技術|時間
+|link:https://kuanchungfeng.github.io/[個人部落格(Arthur's Blog)]|html+css+hugo|2021/9~
+|link:https://www.cakeresume.com/portfolios/app-e6011e[美食機器人APP,window=_blank]|Android|2019/5
+|link:https://www.cakeresume.com/portfolios/9b2c24[Line Bot解夢機器人,window=_blank]
+|python+heroku+linebot|2018/4
+
+|===
+
+
+== 課程
+
+|===
+|課程名稱|時間|平台
+|AI For Developers With GitHub Copilot, Cursor AI & ChatGPT|2024|Udemy
+|Ionic - Build iOS, Android & Web Apps with Ionic & Angular|2024|Udemy
+|Web Components & Stencil.js - Build Custom HTML Elements|2024|Udemy
+|GitLab CI/CD: Pipelines, CI/CD and DevOps for Beginners|2024|Udemy
+|Cypress End-to-End Testing - Getting Started|2023|Udemy
+|JavaScript Unit Testing - The Practical Guide|2023|Udemy
+|Docker & Kubernetes: The Practical Guide|2023|Udemy
+|Angular - The Complete Guide|2023|Udemy
+|Docker 部署入門完全指南|2022|Hahow 線上課程
+|React Native - The Practical Guide [2022]|2022|Udemy
+|React - The Complete Guide (incl Hooks, React Router, Redux)|2022|Udemy
+|link:../java-course-web-certificate/[Java EE7之前端Web應用程式開發,window=_blank] |2021|恆逸教育訓練中心
+|Java 效能調教|2021|恆逸教育訓練中心
+|Docker Containers與Kubernetes系統管理|2021|恆逸教育訓練中心
+|Java 工程師必備！Spring Boot 零基礎入門|2021|Hahow 線上課程
+|動畫互動網頁特效入門（JS/CANVAS）|2020|Hahow 線上課程
+|python視覺辨識與機器學習|2020|聯成電腦
+|python資料視覺化開發|2019|聯成電腦
+|Python爬蟲程式開發|2019|聯成電腦
+|Redhat-Linux 系統管理應用|2019|聯成電腦
+|PHP網頁程式設計入門|2019|聯成電腦
+|HTML5前端語法應用|2019|聯成電腦
+|Android 專題製作|2019|聯成電腦
+|SQL結構性查詢語言|2019|聯成電腦
+|Python資料分析應用 II|2018|聯成電腦
+|Python程式設計 I|2018|聯成電腦
+|MySQL資料庫管理|2015|聯成電腦
+|Android 應用開發實務|2015|聯成電腦
+|Java OCP認證輔考班|2015|聯成電腦
+|Java程式開發進階|2015|聯成電腦
+|Java程式開發基礎|2015|聯成電腦
+|===
+
+== 書籍
+
+|===
+|書名|閱讀時間
+|單元測試的藝術| 2024
+|前端開發測試入門| 2024
+|決戰！微前端架構| 2024
+|操作介面設計模式| 2023
+|Unity Shader 入門精要| 2023
+|打通RxJS任督二脈| 2023
+|前端三雄首強：用 Angular 高速聰明開發多介面| 2023
+|UX策略| 2022
+|React 學習手冊| 2022
+|React 思考模式-從Hook入門到開發實戰 | 2022
+|物件導向設計模式(GOF) | 2021
+|大話資料結構 | 2021
+|提升程式設計師的面試力 | 2021
+|無瑕的程式碼 敏捷完整篇：物件導向原則、設計模式與C#實踐 | 2021
+|軟體開發人員職涯發展成功手冊 | 2021
+|大話設計模式 | 2021
+|深入淺出設計模式 | 2021
+|深入淺出物件導向分析與設計 | 2020
+|Angular 建置與實行 | 2019
+|Java 8 Lambdas 技術手冊| 2019
+|為你自己學Git| 2019
+|Google御用Android開發語言：Kotlin一書搞定| 2019
+|深入淺出 Kotlin| 2019
+|PHP 學習手冊 | 2019
+|深入淺出Android開發 | 2019
+|Java SE8 技術手冊 | 2018
+|深入淺出Java程式設計 | 2018
+|演算法圖鑑 | 2018
+|SQL活用範例大辭典 | 2018
+|深入淺出PMP | 2018
+|Python 初學特訓班 | 2017
+|===
+
