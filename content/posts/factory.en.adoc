@@ -6,7 +6,7 @@ categories:
   - "DesignPattern"
 tags:
   - "DP"
-  - "Factory pattern"
+  - "FactoryPattern"
 authors: [Arthur]
 toc: true
 ---

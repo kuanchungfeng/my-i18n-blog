@@ -6,7 +6,7 @@ categories:
   - "JasperReports"
 tags:
   - "JasperReports"
-  - "Report Design"
+  - "ReportDesign"
 authors: [Arthur]
 toc: true
 ---
